@@ -147,9 +147,12 @@ void calculate_node_marginal_probabilities(Node *nd, Node *root, size_t num_anno
 
         // Finally, the marginal likelihood of a certain state can be computed
         // by multiplying its up-, down-likelihoods, and its frequency.
+	double s=0.0;
         for (i = 0; i < num_annotations; i++) {
             nd->marginal[i] = nd->top_down_likelihood[i] * nd->bottom_up_likelihood[i] * frequency[i];
+	    s+=nd->marginal[i];
         }
+	printf("%f\n",log(s));
     }
     normalize(nd->marginal, num_annotations);
     if(SIMULATION == TRUE) {
